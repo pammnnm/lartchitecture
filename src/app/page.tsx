@@ -153,7 +153,8 @@ export default function Page() {
       <div className="grid grid-rows-[auto_1fr_auto] min-h-screen">
         <Header />
         <main className="px-3 sm:px-5">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 h-[calc(100vh-220px)] md:h-[calc(100vh-230px)]">
+          {/* Toujours 2 colonnes, même sur iPhone */}
+          <div className="grid grid-cols-2 gap-0 h-[calc(100vh-220px)] md:h-[calc(100vh-230px)]">
             <ColumnScroller photos={left} align="left" />
             <ColumnScroller photos={right} align="right" />
           </div>
