@@ -30,3 +30,9 @@ body {
 h1 {
   font-family: 'StretchPro', Arial, Helvetica, sans-serif;
 }
+
+/* Optimisation : ne pas calculer/peindre les figures hors écran */
+figure {
+  content-visibility: auto;
+  contain-intrinsic-size: 600px; /* hauteur estimée pour éviter le saut */
+}

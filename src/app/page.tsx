@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useMemo } from "react";
+import Image from "next/image";
 
-const PHOTOS = [
+const PHOTOS: { src: string; alt?: string }[] = [
   { src: "/photos/IP2A0094.jpg", alt: "" },
   { src: "/photos/IP2A0096.jpg", alt: "" },
   { src: "/photos/IP2A0097.jpg", alt: "" },
@@ -68,11 +69,11 @@ function Header() {
   return (
     <header className="px-5 sm:px-8 pt-10 pb-6 select-none">
       <h1
-          className="tracking-[-0.01em] text-[26px] sm:text-3xl font-semibold text-neutral-900"
-          style={{ fontFamily: "StretchPro" }}
-        >
-          LARTCHITECTURE
-        </h1>
+        className="tracking-[-0.01em] text-[26px] sm:text-3xl font-semibold text-neutral-900"
+        style={{ fontFamily: "StretchPro" }}
+      >
+        LARTCHITECTURE
+      </h1>
       <p className="mt-1 text-sm sm:text-base text-neutral-700">
         Pierre-Antoine MOURAULT
       </p>
@@ -99,11 +100,13 @@ function ColumnScroller({
               {/* 16:9 strict, pas d'arrondis ni bordures */}
               <div className="relative w-full overflow-hidden">
                 <div style={{ paddingTop: "56.25%" }} />
-                <img
+                <Image
                   src={p.src}
-                  alt={p.alt ?? "Photo"}
-                  loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover"
+                  alt={p.alt ?? ""}
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  priority={i === 0}   // la 1re de chaque colonne en priorité
+                  quality={80}
                 />
               </div>
             </figure>
@@ -121,8 +124,22 @@ function Footer() {
       <div className="flex items-center justify-between flex-wrap gap-3">
         <span>© {new Date().getFullYear()} LARTCHITECTURE</span>
         <div className="flex items-center gap-4">
-          <a href="https://instagram.com/pammnnm" target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:no-underline">@pammnnm</a>
-          <a href="https://instagram.com/pamm_eos" target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:no-underline">@pamm_eos</a>
+          <a
+            href="https://instagram.com/pammnnm"
+            target="_blank"
+            rel="noreferrer"
+            className="underline underline-offset-4 hover:no-underline"
+          >
+            @pammnnm
+          </a>
+          <a
+            href="https://instagram.com/pamm_eos"
+            target="_blank"
+            rel="noreferrer"
+            className="underline underline-offset-4 hover:no-underline"
+          >
+            @pamm_eos
+          </a>
         </div>
       </div>
     </footer>
