@@ -2,6 +2,18 @@ import localFont from "next/font/local";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="fr">
+      <body>
+        {children}
+        <Analytics />
+      </body>
+    </html>
+  );
+}
 
 const stretchPro = localFont({
   src: "./fonts/StretchPro.otf",
