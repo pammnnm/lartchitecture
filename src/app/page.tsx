@@ -30,7 +30,6 @@ function Header() {
 }
 
 import Image from "next/image";
-import Link from "next/link";
 
 function ColumnScroller({
   photos,
