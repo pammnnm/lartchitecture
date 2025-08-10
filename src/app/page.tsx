@@ -23,7 +23,7 @@ function Header() {
         Pierre-Antoine MOURAULT
       </p>
       <p className="mt-6 text-center italic text-sm sm:text-base text-neutral-500">
-        L’Architecture, c’est formuler les problèmes avec clarté. — Le Corbusier
+        Portofolio
       </p>
     </header>
   );

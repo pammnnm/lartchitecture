@@ -2,7 +2,7 @@
 export type Photo = { src: string; alt?: string; info?: string };
 
 export const PHOTOS: Photo[] = [
-  { src: "/photos/IP2A0094.jpg", alt: "", info: "" },
+  { src: "/photos/IP2A0094.jpg", alt: "", info: "Temppeliaukionkirkko - Finlande - Timo & Tuomo Suomalainen" },
   { src: "/photos/IP2A0096.jpg", alt: "", info: "" },
   { src: "/photos/IP2A0097.jpg", alt: "", info: "" },
   { src: "/photos/IP2A0098.jpg", alt: "", info: "" },
