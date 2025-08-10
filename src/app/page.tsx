@@ -44,15 +44,15 @@ function ColumnScroller({
         <div className="flex flex-col gap-4 sm:gap-6">
           {photos.map((p, i) => (
             <figure key={p.src + i}>
-              <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 9" }}>
+              <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16/9" }}>
                 <Link href={`/photo/${encodeURIComponent(p.src.split("/").pop()!)}`}>
                   <Image
                     src={p.src}
-                    alt={p.alt ?? "Photo"}
+                    alt={p.alt ?? ""}
                     fill
                     sizes="(min-width: 768px) 50vw, 100vw"
                     quality={80}
-                    priority={i === 0} // précharge juste la première
+                    priority={i === 0}
                     className="object-cover cursor-pointer"
                   />
                 </Link>

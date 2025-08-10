@@ -36,3 +36,8 @@ figure {
   content-visibility: auto;
   contain-intrinsic-size: 600px; /* hauteur estimée pour éviter le saut */
 }
+
+a, button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
