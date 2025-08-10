@@ -46,7 +46,8 @@ function useLocalLike(slug: string) {
 function ExifItem({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <div className="text-[11px] uppercase tracking-wide text-neutral-500">{label}</div>
+      {/* label plus petit, pas plus fin */}
+      <div className="text-[10px] uppercase tracking-wide text-neutral-500">{label}</div>
       <div className="text-[15px] text-neutral-900">{value}</div>
     </div>
   );
@@ -101,9 +102,23 @@ export default function PhotoViewer({ photo, prevSlug, nextSlug, exif }: Props) 
             }`}
           >
             {liked ? (
-              // cœur plein (noir)
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 21s-6.5-4.35-9.1-7.02C.5 11.5 1 7.5 4.5 6.2 6.6 5.4 8.7 6.1 10 7.6c1.3-1.5 3.4-2.2 5.5-1.4C19 7.5 19.5 11.5 21.1 14c-2.6 2.67-9.1 7-9.1 7z" />
+              // cœur plein avec dégradé violet → rouge
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  <linearGradient id="likeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#8e2de2" />{/* violet */}
+                    <stop offset="100%" stopColor="#e52d27" />{/* rouge */}
+                  </linearGradient>
+                </defs>
+                <path
+                  fill="url(#likeGradient)"
+                  d="M12 21s-6.5-4.35-9.1-7.02C.5 11.5 1 7.5 4.5 6.2 6.6 5.4 8.7 6.1 10 7.6c1.3-1.5 3.4-2.2 5.5-1.4C19 7.5 19.5 11.5 21.1 14c-2.6 2.67-9.1 7-9.1 7z"
+                />
               </svg>
             ) : (
               // cœur contour (gris)
@@ -160,7 +175,7 @@ export default function PhotoViewer({ photo, prevSlug, nextSlug, exif }: Props) 
           </Link>
         </div>
 
-        {/* INFOS + EXIF (version iOS‑like, bien alignée desktop) */}
+        {/* INFOS + EXIF (même rendu, labels juste un poil plus petits) */}
         <div className="p-6">
           <div className="mb-4">
             <h1 className="text-[17px] font-semibold tracking-tight">
