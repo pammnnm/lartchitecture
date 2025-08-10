@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useMemo } from "react";  
 import Image from "next/image";
 
 const PHOTOS: { src: string; alt?: string }[] = [
-  { src: "/photos/IP2A0094.jpg", alt: "" },
+  { src: "/photos/IP2A0094.jpg", alt: "", info: "temppeliaukionkirkko" },
   { src: "/photos/IP2A0096.jpg", alt: "" },
   { src: "/photos/IP2A0097.jpg", alt: "" },
   { src: "/photos/IP2A0098.jpg", alt: "" },
@@ -78,7 +78,7 @@ function Header() {
         Pierre-Antoine MOURAULT
       </p>
       <p className="mt-6 text-center italic text-sm sm:text-base text-neutral-500">
-        Portofolio
+        L’Architecture, c’est formuler les problèmes avec clarté. — Le Corbusier
       </p>
     </header>
   );
@@ -88,7 +88,7 @@ function ColumnScroller({
   photos,
   align = "left",
 }: {
-  photos: { src: string; alt?: string }[];
+  photos: { src: string; alt?: string; info?: string }[];
   align?: "left" | "right";
 }) {
   return (
@@ -97,17 +97,16 @@ function ColumnScroller({
         <div className="flex flex-col gap-4 sm:gap-6">
           {photos.map((p, i) => (
             <figure key={p.src + i}>
-              {/* 16:9 strict, pas d'arrondis ni bordures */}
-              <div className="relative w-full overflow-hidden">
+              <div className="relative w-full overflow-hidden cursor-pointer">
                 <div style={{ paddingTop: "56.25%" }} />
-                <Image
-                  src={p.src}
-                  alt={p.alt ?? ""}
-                  fill
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  priority={i === 0}   // la 1re de chaque colonne en priorité
-                  quality={80}
-                />
+                <Link href={`/photo/${encodeURIComponent(p.src.split("/").pop()!)}`}>
+                  <img
+                    src={p.src}
+                    alt={p.alt ?? "Photo"}
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                </Link>
               </div>
             </figure>
           ))}
@@ -124,22 +123,8 @@ function Footer() {
       <div className="flex items-center justify-between flex-wrap gap-3">
         <span>© {new Date().getFullYear()} LARTCHITECTURE</span>
         <div className="flex items-center gap-4">
-          <a
-            href="https://instagram.com/pammnnm"
-            target="_blank"
-            rel="noreferrer"
-            className="underline underline-offset-4 hover:no-underline"
-          >
-            @pammnnm
-          </a>
-          <a
-            href="https://instagram.com/pamm_eos"
-            target="_blank"
-            rel="noreferrer"
-            className="underline underline-offset-4 hover:no-underline"
-          >
-            @pamm_eos
-          </a>
+          <a href="https://instagram.com/pammnnm" target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:no-underline">@pammnnm</a>
+          <a href="https://instagram.com/pamm_eos" target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:no-underline">@pamm_eos</a>
         </div>
       </div>
     </footer>
@@ -153,8 +138,7 @@ export default function Page() {
       <div className="grid grid-rows-[auto_1fr_auto] min-h-screen">
         <Header />
         <main className="px-3 sm:px-5">
-          {/* Toujours 2 colonnes, même sur iPhone */}
-          <div className="grid grid-cols-2 gap-0 h-[calc(100vh-220px)] md:h-[calc(100vh-230px)]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 h-[calc(100vh-220px)] md:h-[calc(100vh-230px)]">
             <ColumnScroller photos={left} align="left" />
             <ColumnScroller photos={right} align="right" />
           </div>
@@ -164,3 +148,6 @@ export default function Page() {
     </div>
   );
 }
+
+// Export du tableau de photos pour le réutiliser ailleurs
+export { PHOTOS };
