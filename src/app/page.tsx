@@ -1,63 +1,8 @@
 "use client";
 
-import React, { useMemo } from "react";  
-import Image from "next/image";
-
-const PHOTOS: { src: string; alt?: string }[] = [
-  { src: "/photos/IP2A0094.jpg", alt: "", info: "temppeliaukionkirkko" },
-  { src: "/photos/IP2A0096.jpg", alt: "" },
-  { src: "/photos/IP2A0097.jpg", alt: "" },
-  { src: "/photos/IP2A0098.jpg", alt: "" },
-  { src: "/photos/IP2A0099.jpg", alt: "" },
-  { src: "/photos/IP2A0100.jpg", alt: "" },
-  { src: "/photos/IP2A0101.jpg", alt: "" },
-  { src: "/photos/IP2A0102.jpg", alt: "" },
-  { src: "/photos/IP2A0104.jpg", alt: "" },
-  { src: "/photos/IP2A0105.jpg", alt: "" },
-  { src: "/photos/IP2A0106.jpg", alt: "" },
-  { src: "/photos/IP2A0107.jpg", alt: "" },
-  { src: "/photos/IP2A0197.jpg", alt: "" },
-  { src: "/photos/IP2A0237.jpg", alt: "" },
-  { src: "/photos/IP2A0238.jpg", alt: "" },
-  { src: "/photos/IP2A0243.jpg", alt: "" },
-  { src: "/photos/IP2A0244.jpg", alt: "" },
-  { src: "/photos/IP2A0248.jpg", alt: "" },
-  { src: "/photos/IP2A0250.jpg", alt: "" },
-  { src: "/photos/IP2A0251.jpg", alt: "" },
-  { src: "/photos/IP2A0259.jpg", alt: "" },
-  { src: "/photos/IP2A0266.jpg", alt: "" },
-  { src: "/photos/IP2A0271.jpg", alt: "" },
-  { src: "/photos/IP2A0272.jpg", alt: "" },
-  { src: "/photos/IP2A0274.jpg", alt: "" },
-  { src: "/photos/IP2A0276.jpg", alt: "" },
-  { src: "/photos/IP2A0278.jpg", alt: "" },
-  { src: "/photos/IP2A0280.jpg", alt: "" },
-  { src: "/photos/IP2A0297.jpg", alt: "" },
-  { src: "/photos/IP2A0301.jpg", alt: "" },
-  { src: "/photos/IP2A0303.jpg", alt: "" },
-  { src: "/photos/IP2A0201.jpg", alt: "" },
-  { src: "/photos/IP2A0214.jpg", alt: "" },
-  { src: "/photos/IP2A0216.jpg", alt: "" },
-  { src: "/photos/IP2A0218.jpg", alt: "" },
-  { src: "/photos/IP2A0222.jpg", alt: "" },
-  { src: "/photos/IP2A0224.jpg", alt: "" },
-  { src: "/photos/IP2A0227.jpg", alt: "" },
-  { src: "/photos/IP2A0229.jpg", alt: "" },
-  { src: "/photos/IP2A0233.jpg", alt: "" },
-  { src: "/photos/IP2A0234.jpg", alt: "" },
-  { src: "/photos/IP2A0235.jpg", alt: "" },
-  { src: "/photos/IP2A0304.jpg", alt: "" },
-  { src: "/photos/IP2A0306.jpg", alt: "" },
-  { src: "/photos/IP2A0307.jpg", alt: "" },
-  { src: "/photos/IP2A0314.jpg", alt: "" },
-  { src: "/photos/IP2A0315.jpg", alt: "" },
-  { src: "/photos/IP2A0316.jpg", alt: "" },
-  { src: "/photos/IP2A0318.jpg", alt: "" },
-  { src: "/photos/IP2A0319.jpg", alt: "" },
-  { src: "/photos/IP2A0321.jpg", alt: "" },
-  { src: "/photos/IP2A0322.jpg", alt: "" },
-  { src: "/photos/IP2A0324.jpg", alt: "" },
-];
+import React, { useMemo } from "react";
+import Link from "next/link";
+import { PHOTOS } from "../lib/photos";
 
 function splitInTwoEven<T>(arr: T[]) {
   const left: T[] = [], right: T[] = [];
@@ -97,14 +42,14 @@ function ColumnScroller({
         <div className="flex flex-col gap-4 sm:gap-6">
           {photos.map((p, i) => (
             <figure key={p.src + i}>
-              <div className="relative w-full overflow-hidden cursor-pointer">
+              <div className="relative w-full overflow-hidden">
                 <div style={{ paddingTop: "56.25%" }} />
                 <Link href={`/photo/${encodeURIComponent(p.src.split("/").pop()!)}`}>
                   <img
                     src={p.src}
                     alt={p.alt ?? "Photo"}
                     loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="absolute inset-0 h-full w-full object-cover cursor-pointer"
                   />
                 </Link>
               </div>
@@ -138,7 +83,7 @@ export default function Page() {
       <div className="grid grid-rows-[auto_1fr_auto] min-h-screen">
         <Header />
         <main className="px-3 sm:px-5">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 h-[calc(100vh-220px)] md:h-[calc(100vh-230px)]">
+          <div className="grid grid-cols-2 gap-0 h-[calc(100vh-220px)] md:h-[calc(100vh-230px)]">
             <ColumnScroller photos={left} align="left" />
             <ColumnScroller photos={right} align="right" />
           </div>
@@ -148,6 +93,3 @@ export default function Page() {
     </div>
   );
 }
-
-// Export du tableau de photos pour le réutiliser ailleurs
-export { PHOTOS };
