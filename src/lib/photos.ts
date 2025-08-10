@@ -3,11 +3,11 @@ export type Photo = { src: string; alt?: string; info?: string };
 
 export const PHOTOS: Photo[] = [
   { src: "/photos/IP2A0094.jpg", alt: "Temppeliaukionkirkko", info: "Finlande - Timo & Tuomo Suomalainen" },
-  { src: "/photos/IP2A0197.jpg", alt: "Futuro House", info: "Finland - Matto Suuronen" },
+  { src: "/photos/IP2A0197.jpg", alt: "Futuro House", info: "Finlande - Matto Suuronen" },
   { src: "/photos/IP2A0097.jpg", alt: "Temppeliaukionkirkko", info: "Finlande - Timo & Tuomo Suomalainen" },
-  { src: "/photos/IP2A0218.jpg", alt: "Futuro House", info: "Finland - Matto Suuronen" },
+  { src: "/photos/IP2A0218.jpg", alt: "Futuro House", info: "Finlande - Matto Suuronen" },
   { src: "/photos/IP2A0099.jpg", alt: "Temppeliaukionkirkko", info: "Finlande - Timo & Tuomo Suomalainen" },
-  { src: "/photos/IP2A0222.jpg", alt: "Futuro House", info: "Finland - Matto Suuronen" },
+  { src: "/photos/IP2A0222.jpg", alt: "Futuro House", info: "Finlande - Matto Suuronen" },
   { src: "/photos/IP2A0101.jpg", alt: "Temppeliaukionkirkko", info: "Finlande - Timo & Tuomo Suomalainen" },
   { src: "/photos/IP2A0102.jpg", alt: "Temppeliaukionkirkko", info: "Finlande - Timo & Tuomo Suomalainen" },
   { src: "/photos/IP2A0104.jpg", alt: "Temppeliaukionkirkko", info: "Finlande - Timo & Tuomo Suomalainen" },
