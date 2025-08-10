@@ -29,6 +29,9 @@ function Header() {
   );
 }
 
+import Image from "next/image";
+import Link from "next/link";
+
 function ColumnScroller({
   photos,
   align = "left",
@@ -42,14 +45,16 @@ function ColumnScroller({
         <div className="flex flex-col gap-4 sm:gap-6">
           {photos.map((p, i) => (
             <figure key={p.src + i}>
-              <div className="relative w-full overflow-hidden">
-                <div style={{ paddingTop: "56.25%" }} />
+              <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 9" }}>
                 <Link href={`/photo/${encodeURIComponent(p.src.split("/").pop()!)}`}>
-                  <img
+                  <Image
                     src={p.src}
                     alt={p.alt ?? "Photo"}
-                    loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover cursor-pointer"
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    quality={80}
+                    priority={i === 0} // précharge juste la première
+                    className="object-cover cursor-pointer"
                   />
                 </Link>
               </div>
