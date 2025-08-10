@@ -3,10 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build:exif": "node scripts/generate-exif.mjs",
+    "build": "npm run build:exif && next build"
   },
   "dependencies": {
     "@builder.io/react": "^8.2.6",

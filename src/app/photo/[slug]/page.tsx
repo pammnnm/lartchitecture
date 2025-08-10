@@ -2,16 +2,23 @@
 import { notFound } from "next/navigation";
 import { PHOTOS } from "../../../lib/photos";
 import PhotoViewer from "./PhotoViewer";
-import { readExifForSlug } from "../../../lib/exif";
+import exifMap from "../../../lib/exif-data.json";
 
-// ⬇️ 1) forcer le rendu statique (pas de serverless function)
 export const dynamic = "force-static";
-export const revalidate = false; // pas de ISR
-
-// ⬇️ 2) lister tous les slugs pour générer chaque page au build
+export const revalidate = false;
 export function generateStaticParams() {
   return PHOTOS.map((p) => ({ slug: p.src.split("/").pop()! }));
 }
+
+type ExifInfo = {
+  camera?: string;
+  lens?: string;
+  focal?: string;
+  exposure?: string;
+  iso?: string;
+  aperture?: string;
+  date?: string;
+};
 
 export default async function PhotoPage({
   params,
@@ -27,8 +34,7 @@ export default async function PhotoPage({
   const prev = PHOTOS[(index - 1 + PHOTOS.length) % PHOTOS.length];
   const next = PHOTOS[(index + 1) % PHOTOS.length];
 
-  // 🔎 Récupération EXIF depuis /public/photos/<slug>
-  const exif = await readExifForSlug(slug);
+  const exif = (exifMap as Record<string, ExifInfo>)[slug] || {};
 
   return (
     <PhotoViewer
