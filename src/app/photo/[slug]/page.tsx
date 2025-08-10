@@ -1,34 +1,24 @@
+// app/photo/[slug]/page.tsx  (Server Component)
 import { notFound } from "next/navigation";
 import { PHOTOS } from "../../../lib/photos";
+import PhotoViewer from "./PhotoViewer";
 
 export default async function PhotoPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params; // ✅ Next 15: params est un Promise
-  const photo = PHOTOS.find((p) => p.src.endsWith(slug));
-  if (!photo) return notFound();
+  const { slug } = await params; // Next 15: params est un Promise
 
-  return (
-    <div className="bg-white text-neutral-900 min-h-screen">
-      <div className="w-full max-w-6xl mx-auto">
-        <div className="w-full">
-          <img
-            src={photo.src}
-            alt={photo.alt || "Photo"}
-            className="w-full h-auto object-contain"
-          />
-        </div>
-        <div className="p-6">
-          <h1 className="text-xl font-semibold mb-2">
-            {photo.alt || "Sans titre"}
-          </h1>
-          <p className="text-neutral-600">
-            {photo.info || "Aucune information disponible"}
-          </p>
-        </div>
-      </div>
-    </div>
-  );
+  const index = PHOTOS.findIndex((p) => p.src.endsWith(slug));
+  if (index === -1) return notFound();
+
+  const photo = PHOTOS[index];
+  const prev = PHOTOS[(index - 1 + PHOTOS.length) % PHOTOS.length];
+  const next = PHOTOS[(index + 1) % PHOTOS.length];
+
+  const prevSlug = prev.src.split("/").pop()!;
+  const nextSlug = next.src.split("/").pop()!;
+
+  return <PhotoViewer photo={photo} prevSlug={prevSlug} nextSlug={nextSlug} />;
 }
