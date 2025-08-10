@@ -4,6 +4,15 @@ import { PHOTOS } from "../../../lib/photos";
 import PhotoViewer from "./PhotoViewer";
 import { readExifForSlug } from "../../../lib/exif";
 
+// ⬇️ 1) forcer le rendu statique (pas de serverless function)
+export const dynamic = "force-static";
+export const revalidate = false; // pas de ISR
+
+// ⬇️ 2) lister tous les slugs pour générer chaque page au build
+export function generateStaticParams() {
+  return PHOTOS.map((p) => ({ slug: p.src.split("/").pop()! }));
+}
+
 export default async function PhotoPage({
   params,
 }: {
