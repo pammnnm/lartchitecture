@@ -17,7 +17,7 @@ function Header() {
         className="tracking-[-0.01em] text-[26px] sm:text-3xl font-semibold text-neutral-900"
         style={{ fontFamily: "StretchPro" }}
       >
-        LARRTCHITECTUREEE
+        LARTCHITECTURE
       </h1>
       <p className="mt-1 text-sm sm:text-base text-neutral-700">
         Pierre-Antoine MOURAULT
