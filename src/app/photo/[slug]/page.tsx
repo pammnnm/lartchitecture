@@ -2,6 +2,7 @@
 import { notFound } from "next/navigation";
 import { PHOTOS } from "../../../lib/photos";
 import PhotoViewer from "./PhotoViewer";
+import { readExifForSlug } from "../../../lib/exif";
 
 export default async function PhotoPage({
   params,
@@ -17,11 +18,15 @@ export default async function PhotoPage({
   const prev = PHOTOS[(index - 1 + PHOTOS.length) % PHOTOS.length];
   const next = PHOTOS[(index + 1) % PHOTOS.length];
 
+  // 🔎 Récupération EXIF depuis /public/photos/<slug>
+  const exif = await readExifForSlug(slug);
+
   return (
     <PhotoViewer
       photo={photo}
       prevSlug={prev.src.split("/").pop()!}
       nextSlug={next.src.split("/").pop()!}
+      exif={exif}
     />
   );
 }
